@@ -167,7 +167,7 @@ public class encargados {
             agregarEncargado(Encargado7);
             encargado Encargado8 = new encargado("72189019", "Entel", "Noemi", "1234");
             agregarEncargado(Encargado8);
-            encargado Encargado9 = new encargado("72189020", "Ivan", "Nuñez", "1234");
+            encargado Encargado9 = new encargado("72189020", "Ivan", "Nunez", "1234");
             agregarEncargado(Encargado9);
             encargado Encargado10 = new encargado("72189021", "Maduro", "Chavez", "1234");
             agregarEncargado(Encargado10);
@@ -179,7 +179,9 @@ public class encargados {
             actualizar_Estado_Mes();
 
         } else{
+
             actualizar_Estado_Mes();
+
         }
 
     }
@@ -212,7 +214,7 @@ public class encargados {
         }
     }
 
-    public static void iniciarSesion() {
+    public static void iniciarSesion() { //Funciones de prueba nadama
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese su username: ");
