@@ -7,7 +7,7 @@ import java.util.List;
 public class Ingresos {
     
     private List<Ingreso> ingresos;
-    private int contador_id = 1;
+    private int contador_id = 0;
 
     public Ingresos() {
         ingresos = new ArrayList<>();
