@@ -151,39 +151,39 @@ public class encargados {
 
     public static void crear_Encargados_defecto(){
         if(verificar_Encargados()){
-            encargado Encargado1 = new encargado("72189012", "Luis", "Sopero", "1234");
+            encargado Encargado1 = new encargado("72189012", "Carlos", "Lopez", "1234");
             agregarEncargado(Encargado1);
-            encargado Encargado2 = new encargado("72189013", "Jim", "Valencia", "1234");
+            encargado Encargado2 = new encargado("72189013", "Juan", "Martinez", "1234");
             agregarEncargado(Encargado2);
-            encargado Encargado3 = new encargado("72189014", "Diego", "Momazos", "1234");
+            encargado Encargado3 = new encargado("72189014", "Diego", "Ramirez", "1234");
             agregarEncargado(Encargado3);
-            encargado Encargado4 = new encargado("72189015", "Ronnie", "Coimero", "1234");
+            encargado Encargado4 = new encargado("72189015", "Luis", "Gomez", "1234");
             agregarEncargado(Encargado4);
-            encargado Encargado5 = new encargado("72189016", "Sebas", "Heroe", "1234");
+            encargado Encargado5 = new encargado("72189016", "Sebastian", "Torres", "1234");
             agregarEncargado(Encargado5);
-            encargado Encargado6 = new encargado("72189017", "Che", "Guevara", "1234");
+            encargado Encargado6 = new encargado("72189017", "Miguel", "Fernandez", "1234");
             agregarEncargado(Encargado6);
-            encargado Encargado7 = new encargado("72189018", "Muffin", "Botsito", "1234");
+            encargado Encargado7 = new encargado("72189018", "Andres", "Morales", "1234");
             agregarEncargado(Encargado7);
-            encargado Encargado8 = new encargado("72189019", "Entel", "Noemi", "1234");
+            encargado Encargado8 = new encargado("72189019", "Ana", "Vargas", "1234");
             agregarEncargado(Encargado8);
-            encargado Encargado9 = new encargado("72189020", "Ivan", "Nunez", "1234");
+            encargado Encargado9 = new encargado("72189020", "Ivan", "Ortega", "1234");
             agregarEncargado(Encargado9);
-            encargado Encargado10 = new encargado("72189021", "Maduro", "Chavez", "1234");
+            encargado Encargado10 = new encargado("72189021", "Marco", "Castro", "1234");
             agregarEncargado(Encargado10);
-            encargado Encargado11 = new encargado("72189022", "Joshua", "Pato", "1234");
+            encargado Encargado11 = new encargado("72189022", "Joshua", "Chavez", "1234");
             agregarEncargado(Encargado11);
-            encargado Encargado12 = new encargado("72189023", "Fran", "Tata", "1234");
+            encargado Encargado12 = new encargado("72189023", "Francisco", "Soto", "1234");
             agregarEncargado(Encargado12);
-
+    
             actualizar_Estado_Mes();
-
+    
         } else{
-
+    
             actualizar_Estado_Mes();
-
+    
         }
-
+    
     }
 
     public static boolean verificarHabilitado(String username) {
