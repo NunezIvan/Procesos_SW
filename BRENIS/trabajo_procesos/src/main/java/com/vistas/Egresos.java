@@ -4,12 +4,15 @@
  */
 package com.vistas;
 
+import com.datos.egresos;
+import static com.datos.egresos.eliminarEgreso;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import static com.datos.egresos.listarEgresos;
 import com.dominio.egreso;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -39,6 +42,8 @@ public class Egresos extends javax.swing.JPanel {
         Registrar_Egreso_Button = new javax.swing.JButton();
         Registrar_Egreso_Fijo_Button = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
+        modificar_button = new javax.swing.JButton();
+        Eliminar_button = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,21 +79,39 @@ public class Egresos extends javax.swing.JPanel {
             }
         });
 
+        modificar_button.setText("Modificar Egreso");
+        modificar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificar_buttonActionPerformed(evt);
+            }
+        });
+
+        Eliminar_button.setText("Eliminar Egreso");
+        Eliminar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(modificar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Eliminar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Registrar_Egreso_Button)
                         .addGap(18, 18, 18)
-                        .addComponent(Registrar_Egreso_Fijo_Button)))
+                        .addComponent(Registrar_Egreso_Fijo_Button))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,7 +124,9 @@ public class Egresos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Registrar_Egreso_Button)
-                    .addComponent(Registrar_Egreso_Fijo_Button))
+                    .addComponent(Registrar_Egreso_Fijo_Button)
+                    .addComponent(modificar_button)
+                    .addComponent(Eliminar_button))
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -148,29 +173,98 @@ public class Egresos extends javax.swing.JPanel {
     }//GEN-LAST:event_Registrar_Egreso_ButtonActionPerformed
 
     private void Registrar_Egreso_Fijo_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Registrar_Egreso_Fijo_ButtonActionPerformed
-        // Crear un diálogo para el formulario Registro_Egreso_Fijo
+
         JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Agregar Egreso Fijo", true);
-
-        // Crear una instancia de Registro_Egreso_Fijo y asignarle el diálogo
         Registro_Egreso_Fijo registroEgresoFijoPanel = new Registro_Egreso_Fijo();
-        registroEgresoFijoPanel.setDialog(dialog); // Establece el diálogo en el panel
+        registroEgresoFijoPanel.setDialog(dialog);
 
-        // Agregar el panel al diálogo y configurar el tamaño y posición
         dialog.add(registroEgresoFijoPanel);
-        dialog.setSize(304, 300); // Ajusta el tamaño según sea necesario
-        dialog.setLocationRelativeTo(null); // Centra el diálogo en la pantalla
+        dialog.setSize(304, 300);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-
-        // Opcional: Actualizar la tabla después de agregar un nuevo egreso fijo
         cargarDatosEnTabla();
     }//GEN-LAST:event_Registrar_Egreso_Fijo_ButtonActionPerformed
 
+    private void modificar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_buttonActionPerformed
+        int selectedRow = tabla_egresos.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para modificar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Obtener el ID y el tipo de egreso seleccionado
+        int idEgreso = (int) tabla_egresos.getValueAt(selectedRow, 0);
+        String tipoEgreso = (String) tabla_egresos.getValueAt(selectedRow, 1);
+
+        // Crear un objeto egreso y asignar el ID para poder buscarlo en la base de datos
+        egreso egresoSeleccionado = new egreso();
+        egresoSeleccionado.setId_egreso(idEgreso);
+
+        // Verificar si el egreso existe en la base de datos y cargar sus datos
+        if (!egresos.buscarEgreso_id(egresoSeleccionado)) {
+            JOptionPane.showMessageDialog(this, "No se pudo encontrar el egreso seleccionado en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear el diálogo de modificación
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Modificar Egreso", true);
+
+        if ("No_Fijo".equalsIgnoreCase(tipoEgreso)) {
+            Modificar_Egreso modificarEgresoPanel = new Modificar_Egreso(egresoSeleccionado);
+            modificarEgresoPanel.cargarDatosEnCampos();
+            modificarEgresoPanel.setDialog(dialog);
+            dialog.add(modificarEgresoPanel);
+            dialog.setSize(300, 443);
+        } else {
+            Modificar_Egreso_Fijo modificarEgresoFijoPanel = new Modificar_Egreso_Fijo(egresoSeleccionado);
+            modificarEgresoFijoPanel.cargarDatosEnCampos();
+            modificarEgresoFijoPanel.setDialog(dialog);
+            dialog.add(modificarEgresoFijoPanel);
+            dialog.setSize(304, 300);
+        }
+
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+
+        // Actualizar la tabla después de la modificación
+        cargarDatosEnTabla();
+    }//GEN-LAST:event_modificar_buttonActionPerformed
+
+    private void Eliminar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_buttonActionPerformed
+        int selectedRow = tabla_egresos.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Confirmación de eliminación
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Obtener el ID del egreso seleccionado y eliminar el registro
+            int idEgreso = (int) tabla_egresos.getValueAt(selectedRow, 0);
+            egreso egresoSeleccionado = new egreso();
+            egresoSeleccionado.setId_egreso(idEgreso);
+
+            boolean eliminado = eliminarEgreso(egresoSeleccionado);
+            if (eliminado) {
+                JOptionPane.showMessageDialog(this, "Egreso eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatosEnTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar el egreso.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_Eliminar_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Eliminar_button;
     private javax.swing.JButton Registrar_Egreso_Button;
     private javax.swing.JButton Registrar_Egreso_Fijo_Button;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificar_button;
     private javax.swing.JTable tabla_egresos;
     // End of variables declaration//GEN-END:variables
 }

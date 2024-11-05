@@ -23,16 +23,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="modificar_button" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Eliminar_button" min="-2" pref="121" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Registrar_Egreso_Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="Registrar_Egreso_Fijo_Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="916" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollBar1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="Registrar_Egreso_Button" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Registrar_Egreso_Fijo_Button" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -51,6 +55,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Registrar_Egreso_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Registrar_Egreso_Fijo_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="modificar_button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Eliminar_button" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
@@ -147,6 +153,22 @@
       </Events>
     </Component>
     <Component class="javax.swing.JScrollBar" name="jScrollBar1">
+    </Component>
+    <Component class="javax.swing.JButton" name="modificar_button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modificar Egreso"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificar_buttonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Eliminar_button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Egreso"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Eliminar_buttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

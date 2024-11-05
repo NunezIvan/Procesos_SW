@@ -189,7 +189,13 @@ public class miPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void controlCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlCajaActionPerformed
-        // TODO add your handling code here:
+       control_caja controlCaja = new control_caja();
+
+        // Mostrar la ventana control_caja
+        controlCaja.setVisible(true);
+
+        // Cerrar o esconder la ventana actual (Inicio)
+        this.dispose();
     }//GEN-LAST:event_controlCajaActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
