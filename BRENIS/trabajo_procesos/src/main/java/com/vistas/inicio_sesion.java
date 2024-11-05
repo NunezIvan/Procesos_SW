@@ -4,6 +4,7 @@
  */
 package com.vistas;
 import com.datos.encargados;
+import static com.datos.encargados.crear_Encargados_defecto;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +17,7 @@ public class inicio_sesion extends javax.swing.JFrame {
      * Creates new form inicio_sesion
      */
     public inicio_sesion() {
+        crear_Encargados_defecto();
         initComponents();
     }
 

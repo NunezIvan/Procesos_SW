@@ -27,7 +27,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        control_caja_button = new javax.swing.JButton();
         miPerfil = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,7 +58,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Control de Caja");
+        control_caja_button.setText("Control de Caja");
+        control_caja_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                control_caja_buttonActionPerformed(evt);
+            }
+        });
 
         miPerfil.setText("Mi Perfil");
         miPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +168,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
-                        .addComponent(jButton2)
+                        .addComponent(control_caja_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(miPerfil))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -187,7 +192,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(miPerfil)
-                    .addComponent(jButton2))
+                    .addComponent(control_caja_button))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -252,6 +257,18 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void control_caja_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_control_caja_buttonActionPerformed
+
+    // Crear una instancia de control_caja
+        control_caja controlCaja = new control_caja();
+
+        // Mostrar la ventana control_caja
+        controlCaja.setVisible(true);
+
+        // Cerrar o esconder la ventana actual (Inicio)
+        this.dispose();
+    }//GEN-LAST:event_control_caja_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,8 +309,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField IngresosTotales;
     private javax.swing.JTextField IngresosTotales1;
     private javax.swing.JTextField IngresosTotales2;
+    private javax.swing.JButton control_caja_button;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
