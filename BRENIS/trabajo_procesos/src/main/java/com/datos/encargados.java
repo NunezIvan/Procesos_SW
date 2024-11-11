@@ -148,36 +148,6 @@ public class encargados {
         }
         
     }
-    
-    
-    public static boolean verificarCredenciales(String username, String contraseña) {
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection con = conexion.getConexion();
-        String sql = "SELECT * FROM encargado WHERE username = ? AND contraseña = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, contraseña);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return verificarHabilitado(username);
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            System.out.println("Error al verificar credenciales: " + e.getMessage());
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
-    }
-
 
     public static void crear_Encargados_defecto(){
         if(verificar_Encargados()){
@@ -215,9 +185,9 @@ public class encargados {
         }
     
     }
+    
 
     public static boolean verificarHabilitado(String username) {
-        
         PreparedStatement ps;
         ResultSet rs;
         Connection con = conexion.getConexion();
@@ -245,8 +215,7 @@ public class encargados {
         }
     }
 
-    public static void iniciarSesion() {
-       
+    public static void iniciarSesion() { //Funciones de prueba nadama
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese su username: ");
@@ -285,5 +254,9 @@ public class encargados {
         }
     }
 
+    public static void main(String[] args) {
+        crear_Encargados_defecto();
+        iniciarSesion();
+    }
 
 }
