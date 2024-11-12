@@ -227,21 +227,12 @@ public class encargados {
             agregarEncargado(Encargado11);
             encargado Encargado12 = new encargado("72189023", "Francisco", "Soto", "1234");
             agregarEncargado(Encargado12);
-<<<<<<< HEAD
-    
-            actualizar_Estado_Mes();
-    
-        } else{
-    
-            actualizar_Estado_Mes();
-=======
             
             actualizarEstadoAnual();
     
         } else{
     
             actualizarEstadoAnual();
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
     
         }
     
@@ -282,8 +273,6 @@ public class encargados {
         Connection con = conexion.getConexion();
         String sql = "SELECT * FROM periodo WHERE año_periodo = ?";
 
-<<<<<<< HEAD
-=======
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, año);
@@ -314,7 +303,6 @@ public class encargados {
         }
     }
 
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
     public static void iniciarSesion() { //Funciones de prueba nadama
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);

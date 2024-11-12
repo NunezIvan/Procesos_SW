@@ -153,11 +153,7 @@ public class egreso {
         this.id_egreso = id_egreso;
     }
 
-<<<<<<< HEAD
-    public egreso(String tipo_Egreso, String tipo_pago, String A_nombre, int dia_egreso, int mes_egreso, int year_egreso, String descripcion, String encargado_DNI){
-=======
     public egreso(String tipo_Egreso, String tipo_pago, String A_nombre, int dia_egreso, int mes_egreso, int year_egreso, String descripcion, Float monto,String encargado_DNI){
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
         this.tipo_egreso = tipo_Egreso;
         this.tipo_pago = tipo_pago;
         this.A_nombre = A_nombre;
@@ -165,20 +161,12 @@ public class egreso {
         this.mes_egreso = mes_egreso;
         this.year_egreso = year_egreso;
         this.descripcion = descripcion;
-<<<<<<< HEAD
-        this.encargado_DNI = encargado_DNI;
-    }
-
-    public egreso(int id_egreso, String tipo_Egreso, String tipo_pago, String A_nombre, int dia_egreso, int mes_egreso, int year_egreso, String descripcion, String encargado_DNI){
-        this(tipo_Egreso,tipo_pago,A_nombre,dia_egreso,mes_egreso,year_egreso,descripcion,encargado_DNI);
-=======
         this.monto = monto;
         this.encargado_DNI = encargado_DNI;
     }
 
     public egreso(int id_egreso, String tipo_Egreso, String tipo_pago, String A_nombre, int dia_egreso, int mes_egreso, int year_egreso, String descripcion,Float monto, String encargado_DNI){
         this(tipo_Egreso,tipo_pago,A_nombre,dia_egreso,mes_egreso,year_egreso,descripcion,monto,encargado_DNI);
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
         this.id_egreso = id_egreso;
     }
 

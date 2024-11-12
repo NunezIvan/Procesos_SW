@@ -9,7 +9,7 @@ public class conexion {
         var baseDatos = "db_procesos";
         var url = "jdbc:mysql://localhost:3306/" + baseDatos;
         var usuario = "root";
-        var password = "tucontraseña";
+        var password = "KazumaHumilde123";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexion = DriverManager.getConnection(url,usuario,password);
