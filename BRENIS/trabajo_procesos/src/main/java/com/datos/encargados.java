@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.conexion.conexion;
-import com.dominio.Periodo;
 import com.dominio.encargado;
 
 public class encargados {
@@ -79,13 +78,10 @@ public class encargados {
             int cambiado = ps.executeUpdate();
             if (cambiado > 0) {
                 System.out.println("El estado de habilitado del encargado con DNI " + Encargado.getDni_encargado() + " ha sido actualizado a true.");
-                
-                // Crear periodo para el encargado habilitado
-                crearPeriodoParaEncargadoHabilitado(Encargado);
             } else {
                 System.out.println("No se encontró un encargado con el DNI especificado.");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error al cambiar el estado de habilitado del encargado: " + e.getMessage());
         } finally {
             try {
@@ -114,22 +110,19 @@ public class encargados {
         }
     }
 
-    public static void actualizarEstadoAnual() {
+    public static void actualizar_Estado_Mes(){
+
         deshabilitar_encargados();
-        Periodos.deshabilitarPeriodos();
 
-        int añoActual = LocalDate.now().getYear();
-        int totalEncargados = 12;
-        int offset = (añoActual - 2024) % totalEncargados;
-
+        int mes_actual = LocalDate.now().getMonthValue();
         PreparedStatement ps;
         ResultSet rs;
         Connection con = conexion.getConexion();
         String sql = "SELECT * FROM encargado ORDER BY DNI LIMIT 1 OFFSET ?";
-
+        
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, offset); // Usa el offset calculado para seleccionar el encargado correspondiente
+            ps.setInt(1, mes_actual - 1);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -139,12 +132,13 @@ public class encargados {
                 Encargado.setApellido(rs.getString("apellido"));
                 Encargado.setContraseña(rs.getString("contraseña"));
 
-                cambiar_permiso(Encargado); // Cambiamos el estado de habilitado del encargado seleccionado
+                cambiar_permiso(Encargado);
+
             } else {
-                System.out.println("No se encontró un encargado para el año actual.");
+                System.out.println("No se encontró un encargado para el mes actual.");
             }
         } catch (Exception e) {
-            System.out.println("Error al seleccionar el encargado para el año actual: " + e.getMessage());
+            System.out.println("Error al seleccionar el encargado para el mes actual: " + e.getMessage());
         } finally {
             try {
                 con.close();
@@ -152,54 +146,8 @@ public class encargados {
                 System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
+        
     }
-
-    
-    public static encargado verificarCredenciales(String username, String contraseña) {
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection con = conexion.getConexion();
-        String sql = "SELECT * FROM encargado WHERE username = ? AND contraseña = ?";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, contraseña);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                // Usamos verificarHabilitado para comprobar si el usuario está habilitado
-                boolean habilitado = verificarHabilitado(username);
-                if (habilitado) {
-                    // Si el usuario está habilitado, creamos y retornamos el objeto encargado
-                    encargado Encargado = new encargado();
-                    Encargado.setDni_encargado(rs.getString("DNI"));
-                    Encargado.setUsername(rs.getString("username"));
-                    Encargado.setContraseña(rs.getString("contraseña"));
-                    Encargado.setNombre(rs.getString("nombre"));
-                    Encargado.setApellido(rs.getString("apellido"));
-                    Encargado.setHabilitado(habilitado);
-                    return Encargado;
-                } else {
-                    System.out.println("Usuario no habilitado.");
-                    return null;
-                }
-            } else {
-                System.out.println("Credenciales incorrectas.");
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al verificar credenciales: " + e.getMessage());
-            return null;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
-    }
-
 
     public static void crear_Encargados_defecto(){
         if(verificar_Encargados()){
@@ -227,26 +175,16 @@ public class encargados {
             agregarEncargado(Encargado11);
             encargado Encargado12 = new encargado("72189023", "Francisco", "Soto", "1234");
             agregarEncargado(Encargado12);
-<<<<<<< HEAD
     
             actualizar_Estado_Mes();
     
         } else{
     
             actualizar_Estado_Mes();
-=======
-            
-            actualizarEstadoAnual();
-    
-        } else{
-    
-            actualizarEstadoAnual();
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
     
         }
     
     }
-    
 
     public static boolean verificarHabilitado(String username) {
         PreparedStatement ps;
@@ -264,7 +202,7 @@ public class encargados {
                 System.out.println("Usuario no encontrado.");
                 return false;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error al verificar si el usuario está habilitado: " + e.getMessage());
             return false;
         } finally {
@@ -275,46 +213,7 @@ public class encargados {
             }
         }
     }
-    
-    public static Periodo buscarPeriodoPorAño(String año) {
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection con = conexion.getConexion();
-        String sql = "SELECT * FROM periodo WHERE año_periodo = ?";
 
-<<<<<<< HEAD
-=======
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, año);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                // Si encuentra el periodo, crea el objeto y asigna los valores
-                Periodo periodo = new Periodo();
-                periodo.setIdPeriodo(rs.getInt("idPeriodo"));
-                periodo.setAñoPeriodo(rs.getString("año_periodo"));
-                periodo.setFechaApertura(rs.getDate("fecha_apertura"));
-                periodo.setDisponible(rs.getBoolean("disponible"));
-                periodo.setEncargadoDNI(rs.getString("Encargado_DNI"));
-                return periodo;
-            } else {
-                System.out.println("No se encontró un periodo para el año " + año);
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al buscar el periodo por año: " + e.getMessage());
-            return null;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
-    }
-
->>>>>>> a81c591d84a6d849d078987f1e6b4b6ecef007f8
     public static void iniciarSesion() { //Funciones de prueba nadama
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
@@ -352,15 +251,6 @@ public class encargados {
                 System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
-    }
-    
-    private static void crearPeriodoParaEncargadoHabilitado(encargado Encargado) {
-        Periodo periodo = new Periodo();
-        periodo.setAñoPeriodo(String.valueOf(LocalDate.now().getYear()));
-        periodo.setFechaApertura(java.sql.Date.valueOf(LocalDate.now()));
-        periodo.setDisponible(true);
-        periodo.setEncargadoDNI(Encargado.getDni_encargado());
-        Periodos.agregarPeriodo(periodo);
     }
 
     public static void main(String[] args) {
