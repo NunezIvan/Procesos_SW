@@ -4,17 +4,24 @@
  */
 package com.vistas;
 
-/**
- *
- * @author Luis
- */
+import com.dominio.Ingreso;
+import static com.datos.Ingresos.ModificarIngreso;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 public class Modificar_Ingreso extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Modificar_Ingreso
-     */
-    public Modificar_Ingreso() {
+    private JDialog dialog;
+    private Ingreso ingresoSeleccionado;
+    
+    public void setDialog(JDialog dialog) {
+        this.dialog = dialog;
+    }
+    
+    public Modificar_Ingreso(Ingreso ingresoSeleccionado) {
         initComponents();
+        this.ingresoSeleccionado = ingresoSeleccionado;
+        cargarDatosEnCampo();
+        
     }
 
     /**
@@ -28,17 +35,17 @@ public class Modificar_Ingreso extends javax.swing.JFrame {
 
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jTextField7_dpto = new javax.swing.JTextField();
+        jTextField1_tipo = new javax.swing.JTextField();
+        jTextField8_DNI_encargado = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        Cancelar_modificar_ingreso_btn = new javax.swing.JButton();
+        jTextField3_dia = new javax.swing.JTextField();
+        Registra_Modificar_Ingreso_btn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTextField9_monto = new javax.swing.JTextField();
+        jTextField4_mes = new javax.swing.JTextField();
+        jTextField5_año = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -52,65 +59,65 @@ public class Modificar_Ingreso extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("TIPO DE PAGO");
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jTextField7_dpto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                jTextField7_dptoActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField1_tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextField1_tipoActionPerformed(evt);
             }
         });
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jTextField8_DNI_encargado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jTextField8_DNI_encargadoActionPerformed(evt);
             }
         });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("DNI DEL ENCARGADO");
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Cancelar_modificar_ingreso_btn.setText("Cancelar");
+        Cancelar_modificar_ingreso_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Cancelar_modificar_ingreso_btnActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextField3_dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextField3_diaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Registrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Registra_Modificar_Ingreso_btn.setText("Registrar");
+        Registra_Modificar_Ingreso_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Registra_Modificar_Ingreso_btnActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("DIA:");
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        jTextField9_monto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                jTextField9_montoActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTextField4_mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jTextField4_mesActionPerformed(evt);
             }
         });
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jTextField5_año.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                jTextField5_añoActionPerformed(evt);
             }
         });
 
@@ -139,40 +146,40 @@ public class Modificar_Ingreso extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField3_dia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField4_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField5_año, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel8)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField8))
+                                    .addComponent(jTextField8_DNI_encargado))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(14, 14, 14)
-                                    .addComponent(jButton1)
+                                    .addComponent(Cancelar_modificar_ingreso_btn)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2))
+                                    .addComponent(Registra_Modificar_Ingreso_btn))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField7))
+                                    .addComponent(jTextField7_dpto))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel9)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jTextField9_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,111 +190,127 @@ public class Modificar_Ingreso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5_año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField7_dpto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField9_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField8_DNI_encargado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Cancelar_modificar_ingreso_btn)
+                    .addComponent(Registra_Modificar_Ingreso_btn))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modificar_Ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modificar_Ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modificar_Ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modificar_Ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Modificar_Ingreso().setVisible(true);
-            }
-        });
+    
+    void cargarDatosEnCampo(){
+        jTextField1_tipo.setText(ingresoSeleccionado.getTipo_pago());
+        jTextField3_dia.setText(String.valueOf(ingresoSeleccionado.getDia_ingreso()));
+        jTextField4_mes.setText(String.valueOf(ingresoSeleccionado.getMes_ingreso()));
+        jTextField5_año.setText(String.valueOf(ingresoSeleccionado.getA_ingreso()));
+        jTextField7_dpto.setText(ingresoSeleccionado.getDpto());
+        jTextField9_monto.setText(String.valueOf(ingresoSeleccionado.getMonto()));
+        jTextField8_DNI_encargado.setText(ingresoSeleccionado.getDNI_encargado());
+        
     }
+    private void jTextField7_dptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7_dptoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7_dptoActionPerformed
+
+    private void jTextField1_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1_tipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1_tipoActionPerformed
+
+    private void jTextField8_DNI_encargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8_DNI_encargadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8_DNI_encargadoActionPerformed
+
+    private void Cancelar_modificar_ingreso_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar_modificar_ingreso_btnActionPerformed
+        if(dialog != null){
+            dialog.dispose();
+        }
+    }//GEN-LAST:event_Cancelar_modificar_ingreso_btnActionPerformed
+
+    private void jTextField3_diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3_diaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3_diaActionPerformed
+
+    private void Registra_Modificar_Ingreso_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Registra_Modificar_Ingreso_btnActionPerformed
+        if(jTextField1_tipo.getText().trim().isEmpty() || jTextField3_dia.getText().trim().isEmpty() ||
+           jTextField4_mes.getText().trim().isEmpty() || jTextField5_año.getText().trim().isEmpty() ||
+           jTextField7_dpto.getText().trim().isEmpty() || jTextField8_DNI_encargado.getText().trim().isEmpty() ||
+           jTextField9_monto.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Porfavor llene todos los campos", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                String tipo_pago = jTextField1_tipo.getText().trim();
+                int dia = Integer.parseInt(jTextField3_dia.getText().trim());
+                int mes = Integer.parseInt(jTextField4_mes.getText().trim());
+                int año = Integer.parseInt(jTextField5_año.getText().trim());
+                String dpto = jTextField7_dpto.getText().trim();
+                float monto = Float.parseFloat(jTextField9_monto.getText().trim());
+                boolean pagado = true;
+                String DNI_encargado = jTextField8_DNI_encargado.getText();
+                
+                ingresoSeleccionado.setTipo_pago(tipo_pago);
+                ingresoSeleccionado.setDia_ingreso(dia);
+                ingresoSeleccionado.setMes_ingreso(mes);
+                ingresoSeleccionado.setA_ingreso(año);
+                ingresoSeleccionado.setDpto(dpto);
+                ingresoSeleccionado.setMonto(monto);
+                ingresoSeleccionado.setPagado(pagado);
+                ingresoSeleccionado.setDNI_encargado(DNI_encargado);
+                
+                if(ModificarIngreso(ingresoSeleccionado)){
+                    JOptionPane.showMessageDialog(this, "Ingreso modificado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Error al modificar el ingreso", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                if(dialog != null){
+                    dialog.dispose();
+                }
+            } catch (NumberFormatException e) {
+                
+                JOptionPane.showMessageDialog(this, "Por favor ingrese datos validos", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_Registra_Modificar_Ingreso_btnActionPerformed
+
+    private void jTextField9_montoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9_montoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9_montoActionPerformed
+
+    private void jTextField4_mesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4_mesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4_mesActionPerformed
+
+    private void jTextField5_añoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5_añoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5_añoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Cancelar_modificar_ingreso_btn;
+    private javax.swing.JButton Registra_Modificar_Ingreso_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -296,12 +319,12 @@ public class Modificar_Ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField1_tipo;
+    private javax.swing.JTextField jTextField3_dia;
+    private javax.swing.JTextField jTextField4_mes;
+    private javax.swing.JTextField jTextField5_año;
+    private javax.swing.JTextField jTextField7_dpto;
+    private javax.swing.JTextField jTextField8_DNI_encargado;
+    private javax.swing.JTextField jTextField9_monto;
     // End of variables declaration//GEN-END:variables
 }
