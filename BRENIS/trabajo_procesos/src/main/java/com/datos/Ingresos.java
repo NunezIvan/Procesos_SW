@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import com.conexion.conexion;
 import java.sql.SQLException;
+import com.dominio.Apartamento;
 public class Ingresos {
     
     public static float CalcularMonto(){
         float montoTotal = 0;
         float montoMensual = 0;
+        int Total_Apartamentos = 0;
+        Apartamentos apartamentos = null;
+        List<Apartamento> apartamentosLlenos = null;
         PreparedStatement ps;
         ResultSet rs;
         Connection con = conexion.getConexion();
@@ -26,10 +30,12 @@ public class Ingresos {
             rs = ps.executeQuery();
             if(rs.next()){
                 montoTotal += rs.getFloat("monto");
-                /*Y de que tabla saco los apartamentos? me invento numeros o como?
-                montoMensual = montoTotal/ApartamentosLlenos;
+                apartamentos.crearLista();
+                apartamentosLlenos = apartamentos.NroEdificiosLlenos();
+                Total_Apartamentos = apartamentosLlenos.size();
+
+                montoMensual = montoTotal/Total_Apartamentos;
                 return montoMensual; 
-                */
             }
             return montoMensual;
         } catch (Exception e) {
@@ -62,6 +68,7 @@ public class Ingresos {
                 ingreso.setDpto(rs.getString("apartamento"));
                 ingreso.setMonto(rs.getInt("monto"));
                 ingreso.setPagado(rs.getBoolean("pagado"));
+                ingreso.setDNI_encargado(rs.getString("encargado_DNI"));
                 ingresos.add(ingreso);
             }
         } catch (SQLException e) {
@@ -93,6 +100,7 @@ public class Ingresos {
                 ingreso.setDpto(rs.getString("apartamento"));
                 ingreso.setMonto(rs.getInt("monto"));
                 ingreso.setPagado(rs.getBoolean("pagado"));
+                ingreso.setDNI_encargado(rs.getString("encargado_DNI"));
                 return true;
             }
         } catch (Exception e) {
@@ -109,7 +117,7 @@ public class Ingresos {
     public static boolean agregarIngreso(Ingreso ingreso){
         PreparedStatement ps;
         Connection con = conexion.getConexion();
-        String sql = "INSERT INTO cuotas (tipo_pago, dia_ingreso, mes_ingreso, ano_ingreso, apartamento, monto, pagado) "
+        String sql = "INSERT INTO cuotas (tipo_pago, dia_ingreso, mes_ingreso, ano_ingreso, apartamento, monto, pagado, encargado_DNI) "
                         + " VALUES(?, ?, ?, ?, ?, ?, ? ) ";
         try {
             ps = con.prepareStatement(sql);
@@ -120,6 +128,7 @@ public class Ingresos {
             ps.setString(5, ingreso.getDpto());
             ps.setFloat(6, ingreso.getMonto());
             ps.setBoolean(7, ingreso.isPagado());
+            ps.setString(8, ingreso.getDNI_encargado());
             ps.execute();
             return true;
             
@@ -138,7 +147,7 @@ public class Ingresos {
     public static boolean ModificarIngreso(Ingreso ingreso){
         PreparedStatement ps;
         Connection con = conexion.getConexion();
-        String sql = "UPDATE cuotas SET tipo_pago=?, dia_ingreso=?, mes_ingreso=?, ano_ingreso=?, apartamento=?, monto=?, pagado=?" 
+        String sql = "UPDATE cuotas SET tipo_pago=?, dia_ingreso=?, mes_ingreso=?, ano_ingreso=?, apartamento=?, monto=?, pagado=?, encargado_DNI=?" 
                         + "WHERE id_ingreso = ?";
         try {
             ps = con.prepareStatement(sql);
@@ -149,7 +158,8 @@ public class Ingresos {
             ps.setString(5, ingreso.getDpto());
             ps.setFloat(6, ingreso.getMonto());
             ps.setBoolean(7, ingreso.isPagado());
-            ps.setInt(8, ingreso.getId_ingreso());
+            ps.setString(8, ingreso.getDNI_encargado());
+            ps.setInt(9, ingreso.getId_ingreso());
             ps.execute();
             
         } catch (Exception e) {

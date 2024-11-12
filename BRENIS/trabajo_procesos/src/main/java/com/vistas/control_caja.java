@@ -147,7 +147,7 @@ public class control_caja extends javax.swing.JFrame {
     }//GEN-LAST:event_Fondo_ButtonActionPerformed
 
     private void Ingresos_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ingresos_ButtonActionPerformed
-        Ingresos ingresos = new Ingresos();
+        ingresos ingresos = new ingresos();
         ingresos.setSize(950,441);
         ingresos.setLocation(0,0);
         
