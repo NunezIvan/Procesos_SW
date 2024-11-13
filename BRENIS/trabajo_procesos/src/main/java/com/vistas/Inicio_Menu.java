@@ -57,20 +57,25 @@ public class Inicio_Menu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panel_pagos = new com.vistas.PanelRound1();
         jLabel6 = new javax.swing.JLabel();
-        panel_cuotas = new com.vistas.PanelRound1();
+        panel_consumo = new com.vistas.PanelRound1();
         jLabel5 = new javax.swing.JLabel();
         panel_perfil = new com.vistas.PanelRound1();
         jLabel7 = new javax.swing.JLabel();
         panel_opciones = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setModalExclusionType(null);
         setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel1.setMaximumSize(new java.awt.Dimension(983, 634));
+        jPanel1.setMinimumSize(new java.awt.Dimension(983, 634));
 
         panel_botones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panel_botones.setMaximumSize(new java.awt.Dimension(58, 34));
+        panel_botones.setMinimumSize(new java.awt.Dimension(58, 34));
         panel_botones.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panel_botonesMouseDragged(evt);
@@ -174,6 +179,8 @@ public class Inicio_Menu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(211, 211, 211));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setMaximumSize(new java.awt.Dimension(979, 59));
+        jPanel2.setMinimumSize(new java.awt.Dimension(979, 59));
         jPanel2.setPreferredSize(new java.awt.Dimension(979, 59));
 
         panel_inicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -250,7 +257,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Seguimiento de Pagos");
+        jLabel6.setText("Cuotas Mensuales");
 
         javax.swing.GroupLayout panel_pagosLayout = new javax.swing.GroupLayout(panel_pagos);
         panel_pagos.setLayout(panel_pagosLayout);
@@ -263,31 +270,31 @@ public class Inicio_Menu extends javax.swing.JFrame {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panel_cuotas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        panel_cuotas.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_consumo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        panel_consumo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_cuotasMouseClicked(evt);
+                panel_consumoMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_cuotasMouseEntered(evt);
+                panel_consumoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_cuotasMouseExited(evt);
+                panel_consumoMouseExited(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Cuotas Mensuales");
+        jLabel5.setText("Gestión de Consumo");
 
-        javax.swing.GroupLayout panel_cuotasLayout = new javax.swing.GroupLayout(panel_cuotas);
-        panel_cuotas.setLayout(panel_cuotasLayout);
-        panel_cuotasLayout.setHorizontalGroup(
-            panel_cuotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panel_consumoLayout = new javax.swing.GroupLayout(panel_consumo);
+        panel_consumo.setLayout(panel_consumoLayout);
+        panel_consumoLayout.setHorizontalGroup(
+            panel_consumoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
         );
-        panel_cuotasLayout.setVerticalGroup(
-            panel_cuotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panel_consumoLayout.setVerticalGroup(
+            panel_consumoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -331,10 +338,10 @@ public class Inicio_Menu extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(panel_caja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(panel_cuotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_consumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(panel_pagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(panel_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -346,14 +353,15 @@ public class Inicio_Menu extends javax.swing.JFrame {
                     .addComponent(panel_pagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_caja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_inicio, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(panel_cuotas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_consumo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_perfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         panel_opciones.setBackground(new java.awt.Color(255, 255, 255));
         panel_opciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panel_opciones.setMaximumSize(new java.awt.Dimension(967, 443));
+        panel_opciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panel_opciones.setMaximumSize(new java.awt.Dimension(967, 512));
         panel_opciones.setMinimumSize(new java.awt.Dimension(967, 512));
         panel_opciones.setPreferredSize(new java.awt.Dimension(967, 512));
 
@@ -372,12 +380,15 @@ public class Inicio_Menu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panel_opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panel_botones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,11 +405,11 @@ public class Inicio_Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -490,21 +501,31 @@ public class Inicio_Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_panel_cajaMouseExited
 
-    private void panel_cuotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_cuotasMouseClicked
-        setBotonSeleccionado(panel_cuotas);
-    }//GEN-LAST:event_panel_cuotasMouseClicked
+    private void panel_consumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_consumoMouseClicked
+        setBotonSeleccionado(panel_consumo);
+        
+        Consumo_panel consumo = new Consumo_panel(Encargado,periodo);
+        consumo.setSize(967, 512);
+        consumo.setLocation(0,0);
+        panel_opciones.removeAll();
+        panel_opciones.add(consumo,BorderLayout.CENTER);
+        panel_opciones.revalidate();
+        panel_opciones.repaint();
+        
+        
+    }//GEN-LAST:event_panel_consumoMouseClicked
 
-    private void panel_cuotasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_cuotasMouseEntered
-        if (botonSeleccionado != panel_cuotas) {
-            panel_cuotas.setBackground(new Color(153, 255, 153));
+    private void panel_consumoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_consumoMouseEntered
+        if (botonSeleccionado != panel_consumo) {
+            panel_consumo.setBackground(new Color(153, 255, 153));
         }
-    }//GEN-LAST:event_panel_cuotasMouseEntered
+    }//GEN-LAST:event_panel_consumoMouseEntered
 
-    private void panel_cuotasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_cuotasMouseExited
-        if (botonSeleccionado != panel_cuotas) {
-            panel_cuotas.setBackground(new Color(242, 242, 242));
+    private void panel_consumoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_consumoMouseExited
+        if (botonSeleccionado != panel_consumo) {
+            panel_consumo.setBackground(new Color(242, 242, 242));
         }
-    }//GEN-LAST:event_panel_cuotasMouseExited
+    }//GEN-LAST:event_panel_consumoMouseExited
 
     private void panel_pagosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_pagosMouseEntered
         if (botonSeleccionado != panel_pagos) {
@@ -555,8 +576,8 @@ public class Inicio_Menu extends javax.swing.JFrame {
         if (botonSeleccionado != panel_caja) {
             panel_caja.setBackground(new Color(242, 242, 242));
         }
-        if (botonSeleccionado != panel_cuotas) {
-            panel_cuotas.setBackground(new Color(242, 242, 242));
+        if (botonSeleccionado != panel_consumo) {
+            panel_consumo.setBackground(new Color(242, 242, 242));
         }
         if (botonSeleccionado != panel_pagos) {
             panel_pagos.setBackground(new Color(242, 242, 242));
@@ -584,7 +605,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panel_botones;
     private com.vistas.PanelRound1 panel_caja;
-    private com.vistas.PanelRound1 panel_cuotas;
+    private com.vistas.PanelRound1 panel_consumo;
     private com.vistas.PanelRound1 panel_inicio;
     private com.vistas.PanelRound1 panel_minimizar;
     private javax.swing.JPanel panel_opciones;

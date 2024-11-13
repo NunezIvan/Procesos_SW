@@ -13,9 +13,22 @@ import javax.swing.JPanel;
 public class control_caja_panel extends javax.swing.JPanel {
     
     private JPanel botonSeleccionado;
+    encargado Encargado;
+    Periodo periodo;
     
     public control_caja_panel(encargado encargadoingresado, Periodo periodoingresado) {
         initComponents();
+        this.Encargado = encargadoingresado;
+        this.periodo = periodoingresado;
+        setBotonSeleccionado(Egresos_Button);
+        Egresos_Panel egresos = new Egresos_Panel(encargadoingresado,periodoingresado);
+        
+        egresos.setSize(953, 451);
+        egresos.setLocation(0,0);
+        jPanel1.removeAll();
+        jPanel1.add(egresos,BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }
     
     
@@ -170,17 +183,18 @@ public class control_caja_panel extends javax.swing.JPanel {
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setMaximumSize(new java.awt.Dimension(953, 441));
+        jPanel1.setMinimumSize(new java.awt.Dimension(953, 441));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 951, Short.MAX_VALUE)
+            .addGap(0, 953, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -211,11 +225,12 @@ public class control_caja_panel extends javax.swing.JPanel {
                     .addComponent(Egresos_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contingencia_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void setBotonSeleccionado(JPanel boton) {
         botonSeleccionado = boton;
         resetearBotones();
@@ -240,7 +255,7 @@ public class control_caja_panel extends javax.swing.JPanel {
     private void Egresos_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Egresos_ButtonMouseClicked
         setBotonSeleccionado(Egresos_Button);
         
-        Egresos_Panel egresos = new Egresos_Panel();
+        Egresos_Panel egresos = new Egresos_Panel(Encargado,periodo);
         
         egresos.setSize(953, 451);
         egresos.setLocation(0,0);
@@ -323,8 +338,5 @@ public class control_caja_panel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
