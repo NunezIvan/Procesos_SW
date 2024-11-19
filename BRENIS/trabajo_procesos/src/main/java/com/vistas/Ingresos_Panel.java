@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import static com.datos.Ingresos.ListarIngresosporPeriodoYMes;
+import static com.datos.Ingresos.CalcularMontoApartamento;
 
 
 
@@ -65,6 +66,8 @@ public class Ingresos_Panel extends javax.swing.JPanel {
         saldo_total_mes = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        CUOTA = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(953, 443));
@@ -210,6 +213,14 @@ public class Ingresos_Panel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("CUOTA DEL MES:");
+
+        CUOTA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        CUOTA.setForeground(new java.awt.Color(0, 0, 0));
+        CUOTA.setText("C");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,6 +234,10 @@ public class Ingresos_Panel extends javax.swing.JPanel {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saldo_total_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CUOTA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ingreso_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
@@ -237,13 +252,21 @@ public class Ingresos_Panel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(tabla_ingresos, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ingreso_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(saldo_total_mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mes_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ingreso_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saldo_total_mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mes_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                        .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(CUOTA))
+                        .addGap(20, 20, 20))))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -290,7 +313,8 @@ public class Ingresos_Panel extends javax.swing.JPanel {
         model.addColumn("Ingresos en Efectivo");
         model.addColumn("Ingresos Totales");
 
-        float total_ingresos = 0.0f; 
+        float total_ingresos = 0.0f;
+        float cuota_mensual = 0.0f;
 
         for (Ingreso ing : ingresos) {
             String descripcionIngreso;
@@ -319,10 +343,12 @@ public class Ingresos_Panel extends javax.swing.JPanel {
 
             // Sumar el monto actual al total de egresos
             total_ingresos += ing.getMonto();
+            cuota_mensual = CalcularMontoApartamento(periodo.getIdPeriodo(), mes_ingreso);
 
             // Agregar la fila al modelo
             model.addRow(fila);
         }
+        CUOTA.setText(String.format("%.2f", cuota_mensual));
         jTable1.setModel(model);
         jLabel5.setText(String.format("%.2f", total_ingresos));
     }
@@ -388,9 +414,11 @@ public class Ingresos_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CUOTA;
     private javax.swing.JPanel ingreso_panel;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel5;

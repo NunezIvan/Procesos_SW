@@ -13,55 +13,48 @@ import java.util.ArrayList;
 import java.util.List;
 import com.conexion.conexion;
 import java.sql.SQLException;
+import static com.datos.egresos.calcularEgresoTotal;
 
 public class Ingresos {
     
-    public static float CalcularMonto(){
+    public static float CalcularMontoApartamento(int idPeriodo, int mes_egresos) {
         float montoTotal = 0.0f;
-        float montoAgua = 0.0f;
         float montoMensual = 0.0f;
-        int Total_Apartamentos = 0;
+        float Consumo_apartamento = 0.0f;
+        int Total_Apartamentos;
+
         List<String> apartamentos = new ArrayList<>();
         ApartamentoMemoria memoria = new ApartamentoMemoria();
         apartamentos = memoria.cargarListaApartamentos();
-        
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection con = conexion.getConexion();
-        String sql = "SELECT SUM(monto) AS total FROM egresos";
+
+        Total_Apartamentos = apartamentos.size();
+        if (Total_Apartamentos == 0) {
+            System.out.println("No hay apartamentos registrados.");
+            return 0.0f;
+        }
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                montoTotal = rs.getFloat("total");
-            }
+            con = conexion.getConexion();
+            montoTotal = calcularEgresoTotal(idPeriodo, mes_egresos);
+            //Consumo_apartamento = ObtenerMontoDelConsumoPorApartamentoMesYPeriodo(idPeriodo, mes_egresos, apartamento);
+            
+            montoMensual = (montoTotal/ Total_Apartamentos);
         } catch (Exception e) {
             System.out.println("Error al calcular el monto: " + e.getMessage());
         } finally {
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (con != null) con.close();
             } catch (SQLException e) {
-                System.out.println("Error al establecer la conexion: " +e.getMessage());
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
-        String sql2 = "SELECT SUM(monto_Total) AS total FROM consumo_agua";
-        try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                montoAgua = rs.getFloat("total");
-                Total_Apartamentos = apartamentos.size();
-                montoMensual = (montoTotal+montoAgua)/Total_Apartamentos;
-            }
-        } catch (Exception e) {
-            System.out.println("Error al calcular el monto: " + e.getMessage());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println("Error al establecer la conexion: " +e.getMessage());
-            }
-        }
+
         return montoMensual;
     }
     
@@ -279,16 +272,17 @@ public class Ingresos {
         return false;
     }
     
-    public static float calcularEgresoTotal(int idPeriodo, int mes_ingreso) {
+    public static float calcularIngresoTotal(int idPeriodo, int mes_ingreso, boolean pagado) {
             float total_Ingreso = 0.0f;
 
-            String sql = "SELECT SUM(monto) AS total FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ?";
+            String sql = "SELECT SUM(monto) AS total FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ? AND pagado = ?";
 
             try (Connection con = conexion.getConexion();
                  PreparedStatement ps = con.prepareStatement(sql)) {
 
                 ps.setInt(1, idPeriodo); // Filtro por periodo
                 ps.setInt(2, mes_ingreso); // Filtro por mes
+                ps.setBoolean(3, pagado); //Filtro por pago
 
                 ResultSet rs = ps.executeQuery();
 

@@ -2,7 +2,7 @@ package com.vistas;
 
 import com.conexion.conexion;
 import static com.datos.Ingresos.agregarIngreso;
-import static com.datos.Ingresos.CalcularMonto;
+import static com.datos.Ingresos.CalcularMontoApartamento;
 import com.dominio.Periodo;
 import com.dominio.Ingreso;
 import com.dominio.encargado;
@@ -436,10 +436,8 @@ public class registrar_ingreso extends javax.swing.JFrame {
         String modoPago = jComboBox2.getSelectedItem().toString();
         String fecha = jTextField2.getText().trim();
         String apartamento = jTextField4.getText().trim();
-        String montostr = Float.toString(CalcularMonto());
-        boolean pagado = true;
-        jTextField3.setText(montostr);
         float montoTotal = Float.parseFloat(jTextField3.getText().trim());
+        boolean pagado = true;
 
 
         if (apartamento.isEmpty() || fecha.isEmpty()) {

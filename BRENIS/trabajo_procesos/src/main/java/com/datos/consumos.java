@@ -394,4 +394,29 @@ public class consumos {
 
         return listaConsumos;
     }
+    
+    public static float ObtenerMontoDelConsumoPorApartamentoMesYPeriodo(int idPeriodo, int mesEgreso, String apartamento) {
+            float Consumo_Apartamento = 0.0f;
+
+            String sql = "SELECT SUM(monto) AS total FROM egresos WHERE idPeriodo = ? AND mes_egreso = ? AND apartamento = ?";
+
+            try (Connection con = conexion.getConexion();
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+
+                ps.setInt(1, idPeriodo); // Filtro por periodo
+                ps.setInt(2, mesEgreso); // Filtro por mes
+                ps.setString(3, apartamento); //Filtro por apartamento
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    Consumo_Apartamento = rs.getFloat("total"); // Obtiene el total de la columna "total"
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Error al calcular el egreso total: " + e.getMessage());
+            }
+
+            return Consumo_Apartamento;
+        }
 }
