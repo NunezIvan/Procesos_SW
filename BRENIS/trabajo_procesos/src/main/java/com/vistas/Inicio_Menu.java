@@ -362,7 +362,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
         panel_opciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panel_opciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panel_opciones.setMaximumSize(new java.awt.Dimension(967, 512));
-        panel_opciones.setMinimumSize(new java.awt.Dimension(967, 512));
+        panel_opciones.setMinimumSize(new java.awt.Dimension(959, 511));
         panel_opciones.setPreferredSize(new java.awt.Dimension(967, 512));
 
         javax.swing.GroupLayout panel_opcionesLayout = new javax.swing.GroupLayout(panel_opciones);
@@ -382,7 +382,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel_opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -397,7 +397,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel_opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -505,7 +505,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
         setBotonSeleccionado(panel_consumo);
         
         Consumo_panel consumo = new Consumo_panel(Encargado,periodo);
-        consumo.setSize(967, 512);
+        consumo.setSize(959, 511);
         consumo.setLocation(0,0);
         panel_opciones.removeAll();
         panel_opciones.add(consumo,BorderLayout.CENTER);
@@ -535,6 +535,14 @@ public class Inicio_Menu extends javax.swing.JFrame {
 
     private void panel_pagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_pagosMouseClicked
         setBotonSeleccionado(panel_pagos);
+        
+        Cuotas_Panel cuotas = new Cuotas_Panel(Encargado,periodo);
+        cuotas.setSize(967, 512);
+        cuotas.setLocation(0,0);
+        panel_opciones.removeAll();
+        panel_opciones.add(cuotas,BorderLayout.CENTER);
+        panel_opciones.revalidate();
+        panel_opciones.repaint();
     }//GEN-LAST:event_panel_pagosMouseClicked
 
     private void panel_pagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_pagosMouseExited

@@ -2,6 +2,7 @@ package com.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class conexion {
     public static Connection getConexion(){
@@ -25,5 +26,9 @@ public class conexion {
         }else{
             System.out.println("Error al conectarse");
         }
+    }
+
+    public static PreparedStatement prepareStatement(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

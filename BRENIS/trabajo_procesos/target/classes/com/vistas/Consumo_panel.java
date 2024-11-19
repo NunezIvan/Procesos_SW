@@ -11,13 +11,16 @@ import com.dominio.Periodo;
 import com.dominio.consumo_agua;
 import com.dominio.egreso;
 import com.dominio.encargado;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
@@ -55,10 +58,13 @@ public class Consumo_panel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(967, 512));
-        setMinimumSize(new java.awt.Dimension(967, 512));
-        setPreferredSize(new java.awt.Dimension(967, 512));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setFocusable(false);
+        setMaximumSize(new java.awt.Dimension(959, 511));
+        setMinimumSize(new java.awt.Dimension(959, 511));
+        setPreferredSize(new java.awt.Dimension(959, 511));
         setRequestFocusEnabled(false);
+        setVerifyInputWhenFocusTarget(false);
 
         consumo_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         consumo_panel.setMaximumSize(new java.awt.Dimension(167, 41));
@@ -98,8 +104,6 @@ public class Consumo_panel extends javax.swing.JPanel {
             .addGroup(consumo_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
         );
-
-        jLabel3.getAccessibleContext().setAccessibleParent(null);
 
         contometro_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         contometro_panel.setMaximumSize(new java.awt.Dimension(167, 41));
@@ -224,9 +228,9 @@ public class Consumo_panel extends javax.swing.JPanel {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(955, 420));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(955, 420));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(955, 420));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(954, 420));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(954, 420));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(954, 420));
 
         jTable1.setFont(new java.awt.Font("Roboto Light", 1, 13)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -247,11 +251,11 @@ public class Consumo_panel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setMaximumSize(new java.awt.Dimension(954, 420));
-        jTable1.setMinimumSize(new java.awt.Dimension(954, 420));
-        jTable1.setPreferredSize(new java.awt.Dimension(954, 420));
+        jTable1.setMaximumSize(new java.awt.Dimension(933, 420));
+        jTable1.setMinimumSize(new java.awt.Dimension(933, 420));
+        jTable1.setPreferredSize(new java.awt.Dimension(933, 420));
         jTable1.setRowHeight(30);
         jTable1.setSelectionBackground(new java.awt.Color(153, 153, 153));
         jTable1.setShowGrid(true);
@@ -268,11 +272,8 @@ public class Consumo_panel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,15 +286,17 @@ public class Consumo_panel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(contometro_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(consumo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)))
-                .addGap(14, 14, 14))
+                        .addComponent(consumo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(contometro_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -561,13 +564,7 @@ public class Consumo_panel extends javax.swing.JPanel {
             System.out.println("Error: Las columnas no están inicializadas.");
         }
     }
-
-
-
-
-
-
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel aacc_panel;

@@ -394,4 +394,79 @@ public class consumos {
 
         return listaConsumos;
     }
+    
+        public static boolean existeConsumoAguaPorDepartamento(String apartamento, int idPeriodo, int mesConsumo) {
+        Connection con = conexion.getConexion();
+        String sql = "SELECT 1 FROM consumo_agua WHERE apartamento = ? AND idPeriodo = ? AND mes_consumo = ? LIMIT 1";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, apartamento.trim()); // Asegúrate de eliminar espacios innecesarios
+            ps.setInt(2, idPeriodo);
+            ps.setInt(3, mesConsumo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return true; // Se encontró el consumo
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error verificando consumo de agua para " + apartamento + ": " + e.getMessage());
+        }
+        return false; // No se encontró el consumo
+        }
+        
+    public static float obtenerConsumoAguaPorDepartamento(String apartamento, int idPeriodo, int mesConsumo) {
+        Connection con = conexion.getConexion();
+        String sql = "SELECT monto_total FROM consumo_agua WHERE apartamento = ? AND idPeriodo = ? AND mes_consumo = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, apartamento);
+            ps.setInt(2, idPeriodo);
+            ps.setInt(3, mesConsumo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getFloat("monto_total"); // Retorna el monto total del consumo de agua
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el consumo de agua por departamento: " + e.getMessage());
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar la conexión: " + e.getMessage());
+            }
+        }
+        return 0.0f; // Retorna 0 si no se encuentra registro o ocurre un error
+    }
+    
+    public static consumo_agua obtenerConsumoAACC(int idPeriodo, int mes) {
+        Connection con = conexion.getConexion();
+        String sql = "SELECT * FROM consumo_agua WHERE tipo_consumo = ? AND idPeriodo = ? AND mes_consumo = ? LIMIT 1";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "AACC");
+            ps.setInt(2, idPeriodo);
+            ps.setInt(3, mes);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new consumo_agua(
+                            rs.getString("tipo_consumo"),
+                            rs.getInt("mes_consumo"),
+                            rs.getInt("lectura_anterior"),
+                            rs.getInt("lectura_actual"),
+                            rs.getFloat("cargo_fijo"),
+                            rs.getString("mora"),
+                            rs.getFloat("igv_consumo"),
+                            rs.getFloat("pagoConsumo"),
+                            rs.getFloat("pagoDesague"),
+                            rs.getFloat("monto_Total"),
+                            rs.getString("apartamento"),
+                            rs.getInt("idPeriodo"),
+                            rs.getString("Encargado_DNI")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el consumo de AACC: " + e.getMessage());
+        }
+        return null; // No se encontró el AACC
+    }
+
+    
 }

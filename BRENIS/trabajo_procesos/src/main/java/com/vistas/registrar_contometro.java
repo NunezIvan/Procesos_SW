@@ -3,6 +3,7 @@ package com.vistas;
 import com.conexion.conexion;
 import static com.datos.consumos.actualizarConsumo;
 import static com.datos.consumos.agregarConsumo;
+import static com.datos.consumos.obtenerConsumoAACC;
 import static com.datos.consumos.obtenerConsumoExteriorPorMesYPeriodo;
 import static com.datos.consumos.obtenerConsumoPorPeriodoMesApartamento;
 import static com.datos.egresos.agregarEgreso;
@@ -425,6 +426,22 @@ public class registrar_contometro extends javax.swing.JFrame {
                 return;
             }
 
+            consumo_agua consumoAACC = obtenerConsumoAACC(periodo.getIdPeriodo(), mes);
+
+            // Validar si existe el consumo de AACC
+            if (consumoAACC == null) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Debe registrar primero el consumo del AACC.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                this.setVisible(false); // Cierra la ventana
+                return;
+            }
+
+            float valorAACC = consumoAACC.getMontoTotal() / 10.0f;
+
             consumo_agua consumoExistente = obtenerConsumoPorPeriodoMesApartamento(periodo.getIdPeriodo(), mes, apart);
 
             // Calcular el total de lectura sin redondeo
@@ -441,16 +458,16 @@ public class registrar_contometro extends javax.swing.JFrame {
                     jTextField4.setText(String.valueOf(consumoExistente.getLecturaAnterior()));
                     jTextField5.setText(String.valueOf(consumoExistente.getLecturaActual()));
                     jComboBox2.setSelectedItem(consumoExistente.getApartamento());
-                    actualizarConsumoExistente(consumoExistente, total_lectura);
+                    actualizarConsumoExistente(consumoExistente, total_lectura + valorAACC);
                 }
             } else {
                 float total_consumo = total_lectura * this.cuota_agua;
                 float total_desague = total_lectura * this.cuota_desague;
-                float cargo_fijol = this.cargo_fijo/10;
+                float cargo_fijol = this.cargo_fijo / 10;
                 float mora1 = this.mora;
                 String mora_str = String.valueOf(mora1);
                 float total_IGV = (total_consumo + total_desague + cargo_fijol) * this.igv;
-                float total_consumo_agua = total_consumo + total_desague + cargo_fijol + total_IGV - (mora1 / 10);
+                float total_consumo_agua = total_consumo + total_desague + cargo_fijol + total_IGV - (mora1 / 10) + valorAACC;
 
                 consumo_agua consumo_apartamento = new consumo_agua("Apartamento", mes, lectAnt, lectAct, cargo_fijol, mora_str,
                         total_IGV, total_consumo, total_desague, total_consumo_agua, apart, periodo.getIdPeriodo(), Encargado.getDni_encargado());

@@ -152,8 +152,10 @@ public class Egresos_Panel extends javax.swing.JPanel {
         tabla_egresos.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         tabla_egresos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla_egresos.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
-        tabla_egresos.setMaximumSize(new java.awt.Dimension(452, 402));
-        tabla_egresos.setMinimumSize(new java.awt.Dimension(452, 402));
+        tabla_egresos.setMaximumSize(new java.awt.Dimension(928, 368));
+        tabla_egresos.setMinimumSize(new java.awt.Dimension(928, 368));
+        tabla_egresos.setName(""); // NOI18N
+        tabla_egresos.setPreferredSize(new java.awt.Dimension(928, 368));
 
         jTable1.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -179,9 +181,10 @@ public class Egresos_Panel extends javax.swing.JPanel {
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setFocusable(false);
         jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setMaximumSize(new java.awt.Dimension(540, 80));
-        jTable1.setMinimumSize(new java.awt.Dimension(540, 80));
+        jTable1.setMaximumSize(new java.awt.Dimension(928, 368));
+        jTable1.setMinimumSize(new java.awt.Dimension(928, 368));
         jTable1.setName(""); // NOI18N
+        jTable1.setPreferredSize(new java.awt.Dimension(928, 368));
         jTable1.setRequestFocusEnabled(false);
         jTable1.setRowSelectionAllowed(false);
         jTable1.setSelectionBackground(new java.awt.Color(102, 102, 102));
@@ -202,6 +205,9 @@ public class Egresos_Panel extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setMaximumSize(new java.awt.Dimension(15, 41));
+        jPanel5.setMinimumSize(new java.awt.Dimension(15, 41));
+        jPanel5.setPreferredSize(new java.awt.Dimension(15, 41));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -234,12 +240,17 @@ public class Egresos_Panel extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Enero", " Febrero", " Marzo", " Abril", " Mayo", " Junio", " Julio", " Agosto", " Septiembre", " Octubre", " Noviembre", " Diciembre", " " }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -248,15 +259,15 @@ public class Egresos_Panel extends javax.swing.JPanel {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saldo_total_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                 .addComponent(egreso_fijo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(egreso_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabla_egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(tabla_egresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,8 +280,8 @@ public class Egresos_Panel extends javax.swing.JPanel {
                     .addComponent(egreso_fijo_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(saldo_total_mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mes_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -396,6 +407,10 @@ public class Egresos_Panel extends javax.swing.JPanel {
     private void egreso_fijo_panelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_egreso_fijo_panelMouseExited
         egreso_fijo_panel.setBackground(new Color(242,242,242));
     }//GEN-LAST:event_egreso_fijo_panelMouseExited
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void personalizar_tablas() {
         // Comprobar si el JTable tiene el modelo de columna adecuado
