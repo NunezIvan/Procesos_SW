@@ -91,9 +91,10 @@ public class Ingresos {
         return null;
     }
     
-    public static List<Ingreso> obtenerIngresosPorPeriodoYMes(int idPeriodo, int mesIngreso) {
+    public static List<Ingreso> obtenerIngresosPagadosPorPeriodoYMes_1(int idPeriodo, int mesIngreso) {
         List<Ingreso> ingresos = new ArrayList<>();
-        String sql = "SELECT * FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ?";
+        String sql = "SELECT * FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ? AND pagado = true";
+
         try (Connection con = conexion.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -118,12 +119,45 @@ public class Ingresos {
                 }
             }
         } catch (SQLException e) {
+            System.out.println("Error al obtener ingresos pagados por periodo y mes: " + e.getMessage());
+        }
+
+        return ingresos;
+    }
+
+    public static List<Ingreso> obtenerIngresosPorPeriodoYMes(int idPeriodo, int mesIngreso) {
+        List<Ingreso> ingresos = new ArrayList<>();
+        String sql = "SELECT * FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idPeriodo);
+            ps.setInt(2, mesIngreso);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Ingreso ingreso = new Ingreso(
+                        rs.getInt("id_ingreso"),
+                        rs.getString("tipo_pago"),
+                        rs.getInt("dia_ingreso"),
+                        rs.getInt("mes_ingreso"),
+                        rs.getInt("ano_ingreso"),
+                        rs.getString("apartamento"),
+                        rs.getFloat("monto"),
+                        rs.getBoolean("pagado"),
+                        rs.getInt("idPeriodo"),
+                        rs.getString("Encargado_DNI")
+                    );
+                    ingresos.add(ingreso);
+                }
+            }
+        } catch (SQLException e) {
             System.out.println("Error al obtener ingresos por periodo y mes: " + e.getMessage());
         }
         return ingresos;
     }
-    
 
+    
     public static boolean actualizarIngreso(Ingreso ingreso) {
         String sql = "UPDATE cuotas SET tipo_pago = ?, dia_ingreso = ?, mes_ingreso = ?, ano_ingreso = ?, apartamento = ?, monto = ?, pagado = ?, idPeriodo = ?, Encargado_DNI = ? " +
                      "WHERE id_ingreso = ?";
@@ -160,4 +194,66 @@ public class Ingresos {
             return false;
         }
     }
+    
+    public static Ingreso obtenerIngresoPorFiltros(int idPeriodo, String encargadoDNI, int mesIngreso, String apartamento) {
+        Ingreso ingreso = null;
+        String sql = "SELECT * FROM cuotas WHERE idPeriodo = ? AND Encargado_DNI = ? AND mes_ingreso = ? AND apartamento = ?";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idPeriodo);
+            ps.setString(2, encargadoDNI);
+            ps.setInt(3, mesIngreso);
+            ps.setString(4, apartamento);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    ingreso = new Ingreso(
+                        rs.getInt("id_ingreso"),
+                        rs.getString("tipo_pago"),
+                        rs.getInt("dia_ingreso"),
+                        rs.getInt("mes_ingreso"),
+                        rs.getInt("ano_ingreso"),
+                        rs.getString("apartamento"),
+                        rs.getFloat("monto"),
+                        rs.getBoolean("pagado"),
+                        rs.getInt("idPeriodo"),
+                        rs.getString("Encargado_DNI")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener ingreso por filtros: " + e.getMessage());
+        }
+
+        return ingreso;
+    }
+    
+    public static boolean verificarIngresoPagado(int idPeriodo, String encargadoDNI, int mesIngreso, String apartamento) {
+        boolean yaPagado = false;
+
+        String sql = "SELECT pagado FROM cuotas WHERE idPeriodo = ? AND Encargado_DNI = ? AND mes_ingreso = ? AND apartamento = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idPeriodo);
+            ps.setString(2, encargadoDNI);
+            ps.setInt(3, mesIngreso);
+            ps.setString(4, apartamento);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    yaPagado = rs.getBoolean("pagado");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al verificar si el ingreso ya está pagado: " + e.getMessage());
+        }
+
+        return yaPagado;
+    }
+    
+    
+    
 }

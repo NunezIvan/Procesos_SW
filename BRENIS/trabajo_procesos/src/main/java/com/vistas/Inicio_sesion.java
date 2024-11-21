@@ -31,8 +31,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
         timer = new Timer(10000, e->conexion.getConexion());
         timer.start();  
         
-        LocalDate fechaActual = LocalDate.now(); // Obtiene la fecha actual
-        int año = fechaActual.getYear(); // Extrae el año de la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+        int año = fechaActual.getYear();
         String año_string = String.valueOf(año);
         this.periodoingresado = buscarPeriodoPorAño(año_string);
         this.setLocationRelativeTo(null);

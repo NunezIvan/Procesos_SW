@@ -93,6 +93,8 @@ public class registrar_consumo extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(309, 535));
+        setMinimumSize(new java.awt.Dimension(309, 535));
         setUndecorated(true);
         setResizable(false);
 

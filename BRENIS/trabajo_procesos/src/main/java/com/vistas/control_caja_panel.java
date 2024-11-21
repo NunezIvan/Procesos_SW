@@ -282,6 +282,17 @@ public class control_caja_panel extends javax.swing.JPanel {
 
     private void Ingresos_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Ingresos_ButtonMouseClicked
         setBotonSeleccionado(Ingresos_Button);
+        
+        Ingreso_Panel ingresos = new Ingreso_Panel(Encargado,periodo);
+        
+        ingresos.setSize(953, 451);
+        ingresos.setLocation(0,0);
+        jPanel1.removeAll();
+        jPanel1.add(ingresos,BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        
+        
     }//GEN-LAST:event_Ingresos_ButtonMouseClicked
 
     private void Ingresos_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Ingresos_ButtonMouseEntered

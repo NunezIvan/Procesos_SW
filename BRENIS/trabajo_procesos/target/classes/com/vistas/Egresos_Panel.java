@@ -12,8 +12,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -150,6 +152,7 @@ public class Egresos_Panel extends javax.swing.JPanel {
         tabla_egresos.setBackground(new java.awt.Color(255, 255, 255));
         tabla_egresos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabla_egresos.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tabla_egresos.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         tabla_egresos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla_egresos.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
         tabla_egresos.setMaximumSize(new java.awt.Dimension(928, 368));
@@ -415,10 +418,11 @@ public class Egresos_Panel extends javax.swing.JPanel {
     private void personalizar_tablas() {
         // Comprobar si el JTable tiene el modelo de columna adecuado
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(230);
+
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(180);
             jTable1.getColumnModel().getColumn(0).setResizable(false);
 
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(95);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(105);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
 
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(45);
@@ -430,16 +434,29 @@ public class Egresos_Panel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(4).setPreferredWidth(55);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
 
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(55);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(45);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            
-             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-            headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-            headerRenderer.setFont(new Font("Roboto Light", Font.BOLD, 12));
+
+            // Personalizar encabezados de la tabla
+            DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    c.setBackground(new Color(166, 189, 211)); // Fondo del encabezado
+                    c.setForeground(Color.BLACK); // Color del texto del encabezado
+                    c.setFont(new Font("Roboto Light", Font.BOLD, 13)); // Fuente del encabezado
+
+                    // Agregar borde a los encabezados
+                    setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
+                    setHorizontalAlignment(SwingConstants.CENTER); // Centrar texto
+                    return c;
+                }
+            };
+
+            // Asignar el renderizador a todos los encabezados
             for (int i = 0; i < jTable1.getColumnCount(); i++) {
                 jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
             }
-            
 
             // Centrar el contenido de las celdas para las columnas de monto
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -454,6 +471,9 @@ public class Egresos_Panel extends javax.swing.JPanel {
             System.out.println("Error: Las columnas no están inicializadas.");
         }
     }
+
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
