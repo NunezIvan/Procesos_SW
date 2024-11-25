@@ -13,8 +13,11 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -37,10 +40,12 @@ public class CuotasM_Panel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 personalizar_tablas();
+                configurarComboBoxMeses();
             }
         });
         
         personalizar_tablas();
+        configurarComboBoxMeses();
     }
 
 
@@ -309,27 +314,64 @@ public class CuotasM_Panel extends javax.swing.JPanel {
         jPanel3.setBackground(new Color (242,242,242));
     }//GEN-LAST:event_jPanel3MouseExited
     
+    private void configurarComboBoxMeses() {
+        jComboBox1.setRenderer(new CustomComboBoxRenderer());
+        jComboBox1.setBackground(Color.WHITE);
+        jComboBox1.setBorder(null);
+    }
+
+    class CustomComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
+        public CustomComboBoxRenderer() {
+            setOpaque(true); // Necesario para mostrar el color de fondo
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            setText(value == null ? "" : value.toString());
+
+            if (isSelected) {
+                setBackground(new Color(204, 204, 204));
+            } else {
+                setBackground(Color.WHITE);
+            }
+
+            setForeground(Color.BLACK);
+            return this;
+        }
+    }
+    
     private void actualizartabla_condiseño(){
         llenarYPersonalizarTablaCuotas(periodo.getIdPeriodo(), jComboBox1.getSelectedIndex() + 1);
         personalizar_tablas();
     }
     
     private void personalizar_tablas() {
-        // Comprobar si el JTable tiene el modelo de columna adecuado
+        // Verificar si las columnas están configuradas
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
 
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
 
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            // Personalizar encabezados de la tabla
+            DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    c.setBackground(new Color(166, 189, 211)); // Fondo del encabezado
+                    c.setForeground(Color.BLACK); // Color del texto del encabezado
+                    c.setFont(new Font("Roboto Light", Font.BOLD, 13)); // Fuente del encabezado
 
-             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-            headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-            headerRenderer.setFont(new Font("Roboto Light", Font.BOLD, 12));
+                    // Agregar borde a los encabezados
+                    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
+                    setHorizontalAlignment(SwingConstants.CENTER); // Centrar texto
+                    return c;
+                }
+            };
+
+            // Asignar el renderizador a todos los encabezados
             for (int i = 0; i < jTable1.getColumnCount(); i++) {
                 jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
             }
-            
 
             // Centrar el contenido de las celdas para las columnas de monto
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -465,7 +507,7 @@ public class CuotasM_Panel extends javax.swing.JPanel {
         jLabel6.setText(sumaXDptoFormateada);
     }
 
-
+    
 
 
 

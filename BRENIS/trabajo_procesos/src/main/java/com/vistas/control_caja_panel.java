@@ -42,7 +42,7 @@ public class control_caja_panel extends javax.swing.JPanel {
         Ingresos_Button = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         contingencia_Button = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        contingenciaFondo = new javax.swing.JLabel();
         fondo_Button = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -134,19 +134,24 @@ public class control_caja_panel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Fondo de Contingencia");
+        contingenciaFondo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        contingenciaFondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        contingenciaFondo.setText("Fondo de Contingencia");
+        contingenciaFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contingenciaFondoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout contingencia_ButtonLayout = new javax.swing.GroupLayout(contingencia_Button);
         contingencia_Button.setLayout(contingencia_ButtonLayout);
         contingencia_ButtonLayout.setHorizontalGroup(
             contingencia_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+            .addComponent(contingenciaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
         );
         contingencia_ButtonLayout.setVerticalGroup(
             contingencia_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(contingenciaFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
 
         fondo_Button.setBackground(new java.awt.Color(255, 255, 255));
@@ -185,6 +190,7 @@ public class control_caja_panel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(953, 441));
         jPanel1.setMinimumSize(new java.awt.Dimension(953, 441));
+        jPanel1.setPreferredSize(new java.awt.Dimension(953, 441));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,9 +217,8 @@ public class control_caja_panel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(contingencia_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fondo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(fondo_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -309,6 +314,7 @@ public class control_caja_panel extends javax.swing.JPanel {
 
     private void contingencia_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contingencia_ButtonMouseClicked
         setBotonSeleccionado(contingencia_Button);
+        
     }//GEN-LAST:event_contingencia_ButtonMouseClicked
 
     private void contingencia_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contingencia_ButtonMouseEntered
@@ -325,6 +331,15 @@ public class control_caja_panel extends javax.swing.JPanel {
 
     private void fondo_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondo_ButtonMouseClicked
         setBotonSeleccionado(fondo_Button);
+        
+        Fondo_Panel fondo = new Fondo_Panel(Encargado,periodo);
+        
+        fondo.setSize(953, 441);
+        fondo.setLocation(0,0);
+        jPanel1.removeAll();
+        jPanel1.add(fondo,BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }//GEN-LAST:event_fondo_ButtonMouseClicked
 
     private void fondo_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondo_ButtonMouseEntered
@@ -339,15 +354,33 @@ public class control_caja_panel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_fondo_ButtonMouseExited
 
+    private void contingenciaFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contingenciaFondoMouseClicked
+        // TODO add your handling code here:
+        
+        setBotonSeleccionado(contingencia_Button);
+        
+        Contingencia_Panel contingencia = new Contingencia_Panel(Encargado, periodo);
+        
+        contingencia.setSize(953,451);
+        
+        contingencia.setLocation(0,0);
+        
+        jPanel1.removeAll();
+        jPanel1.add(contingencia,BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        
+    }//GEN-LAST:event_contingenciaFondoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Egresos_Button;
     private javax.swing.JPanel Ingresos_Button;
+    private javax.swing.JLabel contingenciaFondo;
     private javax.swing.JPanel contingencia_Button;
     private javax.swing.JPanel fondo_Button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

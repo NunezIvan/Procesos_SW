@@ -6,6 +6,8 @@ import com.dominio.Periodo;
 import com.dominio.encargado;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.MatteBorder;
@@ -28,7 +30,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
         setBotonSeleccionado(panel_inicio);
         
         //Iniciar en el panel de inicio
-        Panel_Inicio inicio = new Panel_Inicio();
+        Panel_Inicio inicio = new Panel_Inicio(Encargado,periodo);
         inicio.setSize(967, 512);
         inicio.setLocation(0,0);
         panel_opciones.removeAll();
@@ -39,7 +41,12 @@ public class Inicio_Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/Imagenes/Icono_Logo.png"));
+        return retValue;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,6 +71,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
         panel_opciones = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setModalExclusionType(null);
         setUndecorated(true);
         setResizable(false);
@@ -457,7 +465,7 @@ public class Inicio_Menu extends javax.swing.JFrame {
     private void panel_inicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_inicioMouseClicked
         setBotonSeleccionado(panel_inicio);
         
-        Panel_Inicio inicio = new Panel_Inicio();
+        Panel_Inicio inicio = new Panel_Inicio(Encargado,periodo);
         inicio.setSize(967, 512);
         inicio.setLocation(0,0);
         panel_opciones.removeAll();

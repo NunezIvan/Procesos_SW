@@ -17,6 +17,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -524,6 +525,7 @@ public class Consumo_panel extends javax.swing.JPanel {
                     c.setBackground(new Color(166, 189, 211)); // Color de fondo del header
                     c.setForeground(Color.BLACK); // Color del texto
                     setFont(new Font("Roboto Light", Font.BOLD, 13)); // Fuente personalizada
+                    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK));
                     setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
                     return c;
                 }

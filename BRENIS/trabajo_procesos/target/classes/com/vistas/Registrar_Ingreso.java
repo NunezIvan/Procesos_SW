@@ -6,6 +6,8 @@ import static com.datos.Ingresos.obtenerIngresoPorFiltros;
 import static com.datos.Ingresos.verificarIngresoPagado;
 import com.dominio.Ingreso;
 import com.dominio.Periodo;
+import com.datos.contingencia_db;
+import static com.datos.contingencia_db.pagarContingenciaMensual;
 import com.dominio.encargado;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
@@ -32,7 +34,7 @@ public class Registrar_Ingreso extends javax.swing.JFrame {
         initComponents();
         this.Encargado = encargadoingresado;
         this.periodo = periodoingresado;
-        panel_botones.setBorder(new MatteBorder(0, 0, 2, 2, Color.BLACK));
+        panel_botones.setBorder(new MatteBorder(0, 0, 2, 0, Color.BLACK));
         timer = new Timer(10000, e->conexion.getConexion());
         timer.start(); 
         agregarJCalendar();
@@ -185,7 +187,7 @@ public class Registrar_Ingreso extends javax.swing.JFrame {
         );
 
         jComboBox2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Transferencia", " Yape", " Efectivo", " BCP", " Vía Web" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Transferencia", " BCP", " Efectivo", " " }));
         jComboBox2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jComboBox2.setLightWeightPopupEnabled(false);
         jComboBox2.setMaximumSize(new java.awt.Dimension(76, 29));
@@ -463,9 +465,13 @@ public class Registrar_Ingreso extends javax.swing.JFrame {
         ingreso_actualizado.setMesIngreso(mesIngreso);
         ingreso_actualizado.setAnoIngreso(anoIngreso);
         ingreso_actualizado.setPagado(true);
-
+        
+        
+        
         boolean actualizado = actualizarIngreso(ingreso_actualizado);
         if (actualizado) {
+            /* Colocar aqui la función de contingencias*/
+            pagarContingenciaMensual(mesIngreso, anoIngreso, apart, modoPago);
             JOptionPane.showMessageDialog(this, "Ingreso registrado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
         } else {

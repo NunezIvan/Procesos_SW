@@ -254,6 +254,47 @@ public class Ingresos {
         return yaPagado;
     }
     
-    
-    
+    public static float obtenerSumaIngresos(int idPeriodo) {
+        float sumaTotal = 0.0f;
+        String sql = "SELECT monto FROM cuotas WHERE idPeriodo = ? AND pagado = TRUE";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idPeriodo);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    sumaTotal += rs.getFloat("monto");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener la suma de ingresos pagados por idPeriodo: " + e.getMessage());
+        }
+
+        return sumaTotal;
+    }
+
+    public static float obtenerSumaIngresosPorMes(int idPeriodo, int mesIngreso) {
+        float sumaTotal = 0.0f;
+        String sql = "SELECT SUM(monto) AS total FROM cuotas WHERE idPeriodo = ? AND mes_ingreso = ? AND pagado = TRUE";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idPeriodo);
+            ps.setInt(2, mesIngreso);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    sumaTotal = rs.getFloat("total");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener la suma de ingresos por mes y periodo: " + e.getMessage());
+        }
+
+        return sumaTotal;
+    }
+     
 }

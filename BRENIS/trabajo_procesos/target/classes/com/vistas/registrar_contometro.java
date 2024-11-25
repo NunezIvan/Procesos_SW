@@ -66,7 +66,7 @@ public class registrar_contometro extends javax.swing.JFrame {
         this.cargo_fijo = this.consumo_general.getCargoFijo();
                     
         // Configuración de la UI
-        panel_botones.setBorder(new MatteBorder(0, 0, 2, 2, Color.BLACK));
+        panel_botones.setBorder(new MatteBorder(0, 0, 2, 0, Color.BLACK));
         configurarEstiloSinBordes();
         this.setLocationRelativeTo(null);
     }
@@ -120,6 +120,7 @@ public class registrar_contometro extends javax.swing.JFrame {
         panel_botones.setMaximumSize(new java.awt.Dimension(305, 36));
         panel_botones.setMinimumSize(new java.awt.Dimension(305, 36));
         panel_botones.setPreferredSize(new java.awt.Dimension(305, 36));
+        panel_botones.setRequestFocusEnabled(false);
         panel_botones.setVerifyInputWhenFocusTarget(false);
         panel_botones.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -215,7 +216,7 @@ public class registrar_contometro extends javax.swing.JFrame {
                 .addComponent(panel_salir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel_minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_botonesLayout.setVerticalGroup(
             panel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,10 +333,8 @@ public class registrar_contometro extends javax.swing.JFrame {
                         .addComponent(cancelar_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmar_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(panel_botones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(panel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,12 +417,22 @@ public class registrar_contometro extends javax.swing.JFrame {
         String apart = jComboBox2.getSelectedItem().toString().trim();
 
         try {
+            // Validar si los campos están vacíos
+            if (lectAnt_str.isEmpty() || lectAct_Str.isEmpty()) {
+                throw new IllegalArgumentException("Por favor, complete ambos campos de lectura.");
+            }
+
             int lectAnt = Integer.parseInt(lectAnt_str);
             int lectAct = Integer.parseInt(lectAct_Str);
 
+            // Validar si los valores son negativos
+            if (lectAnt < 0 || lectAct < 0) {
+                throw new IllegalArgumentException("Las lecturas no pueden ser valores negativos.");
+            }
+
+            // Validar si la lectura anterior es mayor o igual a la lectura actual
             if (lectAnt >= lectAct) {
-                JOptionPane.showMessageDialog(this, "La lectura actual debe ser mayor que la lectura anterior.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                throw new IllegalArgumentException("La lectura actual debe ser mayor que la lectura anterior.");
             }
 
             consumo_agua consumoAACC = obtenerConsumoAACC(periodo.getIdPeriodo(), mes);
@@ -476,7 +485,9 @@ public class registrar_contometro extends javax.swing.JFrame {
                 this.setVisible(false);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese números válidos en los campos de lectura.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_confirmar_panelMouseClicked
 

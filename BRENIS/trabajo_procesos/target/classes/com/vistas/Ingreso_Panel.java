@@ -36,6 +36,7 @@ public class Ingreso_Panel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 actualizarTablaIngresos();
                 personalizar_tablas();
+                configurarComboBoxMeses();
             }
         });
         
@@ -74,17 +75,17 @@ public class Ingreso_Panel extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Ingresos", "Ingresos por Transferencia", "Ingresos por Yape", "Ingresos en Efectivo", "Depósito en BCP", "Pago Vía Web"
+                "Ingresos", "Ingresos por Transferencia", "Depósito en BCP", "Ingresos por Efectivo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -139,7 +140,7 @@ public class Ingreso_Panel extends javax.swing.JPanel {
         );
 
         jComboBox1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Enero", " Febrero", " Marzo", " Abril", " Mayo", " Junio", " Julio", " Agosto", " Septiembre", " Octubre", " Noviembre", " Diciembre", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Enero", " Febrero", " Marzo", " Abril", " Mayo", " Junio", " Julio", " Agosto", " Septiembre", " Octubre", " Noviembre", " Diciembre" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -291,11 +292,6 @@ public class Ingreso_Panel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(65);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
 
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(55);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(45);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
 
             // Personalizar encabezados de la tabla
             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer() {
@@ -307,7 +303,7 @@ public class Ingreso_Panel extends javax.swing.JPanel {
                     c.setFont(new Font("Roboto Light", Font.BOLD, 13)); // Fuente del encabezado
 
                     // Agregar borde a los encabezados
-                    setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
+                    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
                     setHorizontalAlignment(SwingConstants.CENTER); // Centrar texto
                     return c;
                 }
@@ -343,17 +339,15 @@ public class Ingreso_Panel extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Ingresos");
         model.addColumn("Ingresos por Transferencia");
-        model.addColumn("Ingresos por Yape");
-        model.addColumn("Ingresos en Efectivo");
         model.addColumn("Depósito en BCP");
-        model.addColumn("Pago Vía Web");
+        model.addColumn("Ingresos en Efectivo");
 
         float totalIngreso = 0.0f; // Variable para calcular el total de ingresos
 
         for (Ingreso ingreso : ingresos) {
             // Descripción del ingreso
             String descripcionIngreso = "Cuota  " + ingreso.getApartamento() + "  |  " +
-                                        ingreso.getDiaIngreso() + "/" + ingreso.getMesIngreso() + "/" + ingreso.getAnoIngreso();
+                                        ingreso.    getDiaIngreso() + "/" + ingreso.getMesIngreso() + "/" + ingreso.getAnoIngreso();
 
             Object[] fila = new Object[6];
             fila[0] = descripcionIngreso;
@@ -365,17 +359,11 @@ public class Ingreso_Panel extends javax.swing.JPanel {
                 case "Transferencia":
                     fila[1] = ingreso.getMonto();
                     break;
-                case "Yape":
+                case "BCP":
                     fila[2] = ingreso.getMonto();
                     break;
                 case "Efectivo":
                     fila[3] = ingreso.getMonto();
-                    break;
-                case "BCP":
-                    fila[4] = ingreso.getMonto();
-                    break;
-                case "Vía Web":
-                    fila[5] = ingreso.getMonto();
                     break;
                 default:
                     System.out.println("Modo de pago no reconocido: " + modoPago);

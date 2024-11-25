@@ -12,44 +12,27 @@ import com.dominio.egreso;
 
 public class egresos {
 
-    public static List<egreso> listarEgresosPorPeriodo(int idPeriodo) {
-        List<egreso> egresos = new ArrayList<>();
-        PreparedStatement ps;
-        ResultSet rs;
-        Connection con = conexion.getConexion();
-        String sql = "SELECT * FROM egresos WHERE idPeriodo = ? ORDER BY id_egreso";
+    public static float obtenerSumaEgresos(int idPeriodo) {
+        float sumaTotal = 0.0f;
+        String sql = "SELECT monto FROM egresos WHERE idPeriodo = ?";
 
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, idPeriodo); // Filtra por el período especificado
-            rs = ps.executeQuery();
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                var egreso = new egreso();
-                egreso.setId_egreso(rs.getInt("id_egreso"));
-                egreso.setTipo_egreso(rs.getString("tipo_egreso"));
-                egreso.setTipo(rs.getString("tipo"));
-                egreso.setModo_pago(rs.getString("modo_pago"));
-                egreso.setA_nombre(rs.getString("A_nombre"));
-                egreso.setDia_egreso(rs.getInt("dia_egreso"));
-                egreso.setMes_egreso(rs.getInt("mes_egreso"));
-                egreso.setAno_egreso(rs.getInt("ano_egreso"));
-                egreso.setMonto(rs.getFloat("monto"));
-                egreso.setIdPeriodo(rs.getInt("idPeriodo"));
-                egreso.setEncargado_DNI(rs.getString("Encargado_DNI"));
-                egresos.add(egreso);
+            ps.setInt(1, idPeriodo);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    sumaTotal += rs.getFloat("monto");
+                }
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar egresos por periodo: " + e.getMessage());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
+            System.out.println("Error al obtener la suma de egresos por idPeriodo: " + e.getMessage());
         }
-        return egresos;
+
+        return sumaTotal;
     }
+
     
     public static List<egreso> listarEgresosPorPeriodoYMes(int idPeriodo, int mesEgreso) {
         List<egreso> egresos = new ArrayList<>();

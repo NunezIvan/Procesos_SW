@@ -28,7 +28,7 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
         initComponents();
         this.Encargado = encargadoingresado;
         this.periodo = periodoingresado;
-        panel_botones.setBorder(new MatteBorder(0, 0, 2, 2, Color.BLACK));
+        panel_botones.setBorder(new MatteBorder(0, 0, 2, 0, Color.BLACK));
         timer = new Timer(10000, e->conexion.getConexion());
         timer.start(); 
         agregarJCalendar(); 
@@ -73,6 +73,8 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(309, 291));
+        setMinimumSize(new java.awt.Dimension(309, 291));
         setUndecorated(true);
         setResizable(false);
 
@@ -84,6 +86,7 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
         panel_botones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panel_botones.setMaximumSize(new java.awt.Dimension(305, 36));
         panel_botones.setMinimumSize(new java.awt.Dimension(305, 36));
+        panel_botones.setName(""); // NOI18N
         panel_botones.setPreferredSize(new java.awt.Dimension(305, 36));
         panel_botones.setVerifyInputWhenFocusTarget(false);
         panel_botones.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -180,7 +183,7 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
                 .addComponent(panel_salir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel_minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         panel_botonesLayout.setVerticalGroup(
             panel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +315,7 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_botones, 309, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -339,7 +342,7 @@ public class registrar_egreso_fijo extends javax.swing.JFrame {
                         .addComponent(cancelar_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmar_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

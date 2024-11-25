@@ -1,7 +1,6 @@
 
 package com.vistas;
 
-import com.conexion.conexion;
 import static com.datos.egresos.listarEgresosPorPeriodoYMes;
 import com.dominio.Periodo;
 import com.dominio.egreso;
@@ -447,7 +446,7 @@ public class Egresos_Panel extends javax.swing.JPanel {
                     c.setFont(new Font("Roboto Light", Font.BOLD, 13)); // Fuente del encabezado
 
                     // Agregar borde a los encabezados
-                    setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
+                    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.BLACK)); // Bordes del encabezado (grid)
                     setHorizontalAlignment(SwingConstants.CENTER); // Centrar texto
                     return c;
                 }

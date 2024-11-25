@@ -8,6 +8,8 @@ import com.dominio.Periodo;
 import com.dominio.encargado;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -17,7 +19,7 @@ import javax.swing.border.MatteBorder;
  *
  * @author USER
  */
-public class Inicio_sesion extends javax.swing.JFrame {
+public final class Inicio_sesion extends javax.swing.JFrame {
 
     int xMouse,yMouse;
     private final Timer timer;
@@ -37,7 +39,14 @@ public class Inicio_sesion extends javax.swing.JFrame {
         this.periodoingresado = buscarPeriodoPorAño(año_string);
         this.setLocationRelativeTo(null);
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/Imagenes/Icono_Logo.png"));
+        return retValue;
+    }
 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,6 +71,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
         setResizable(false);
 
